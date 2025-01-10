@@ -6,14 +6,14 @@ public record CreateProductCommand
 
 public record CreateProductResult(Guid ProductId);
 
-internal class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+internal class CreateProductCommandHandler(IDocumentSession session)
+    : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle
         (CreateProductCommand command, CancellationToken cancellationToken)
     {
         var product = new Product
         {
-            Id = Guid.NewGuid(),
             Name = command.Name,
             Catagory = command.Catagory,
             Description = command.Description,
@@ -21,7 +21,8 @@ internal class CreateProductCommandHandler : ICommandHandler<CreateProductComman
             Price = command.Price
         };
 
-
+        session.Store(product);
+        await session.SaveChangesAsync(cancellationToken);
 
         return new CreateProductResult(product.Id);
     }
