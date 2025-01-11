@@ -43,7 +43,7 @@ internal class UpdateProductComandHandler(IDocumentSession session, ILogger<Upda
 
         if (product is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.id);
         }
 
         product.Name = command.Name;

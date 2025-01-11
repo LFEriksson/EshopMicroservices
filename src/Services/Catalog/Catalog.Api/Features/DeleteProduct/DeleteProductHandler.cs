@@ -24,7 +24,7 @@ internal class DeleteProductcommandHandler(IDocumentSession session, ILogger<Del
         var product = await session.LoadAsync<Product>(command.Guid, cancellationToken);
         if (product is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Guid);
         }
         session.Delete(product);
         await session.SaveChangesAsync(cancellationToken);
