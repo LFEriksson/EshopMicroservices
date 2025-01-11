@@ -7,7 +7,8 @@ public record CreateProductResponse(Guid ProductId);
 
 
 [ApiController]
-[Route("api/v1/product")]
+[Route("api/v1/products")]
+[Tags("Product")]
 public class CreateProductEndpoint(ISender sender) : ControllerBase
 {
     [HttpPost]

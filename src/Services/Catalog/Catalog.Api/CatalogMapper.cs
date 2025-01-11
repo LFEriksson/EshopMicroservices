@@ -1,4 +1,5 @@
-﻿using Riok.Mapperly.Abstractions;
+﻿using Catalog.Api.Features.UpdateProduct;
+using Riok.Mapperly.Abstractions;
 
 namespace Catalog.Api;
 
@@ -8,4 +9,7 @@ public partial class CatalogMapper
 
     public partial CreateProductCommand CreateProductRequestToCreateProductCommand(CreateProductRequest request);
     public partial CreateProductResponse CreateProductResultToCreateProductResponse(CreateProductResult result);
+
+    public partial UpdateProductCommand UpdateProductRequestToUpdateProductCommand(UpdateProductRequest request);
+    public partial UpdateProductResponse UpdateProductResultToUpdateProductResponse(UpdateProductResult result);
 }
