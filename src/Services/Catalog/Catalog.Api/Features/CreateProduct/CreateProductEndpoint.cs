@@ -1,7 +1,7 @@
 ﻿namespace Catalog.Api.Features.CreateProduct;
 
 public record CreateProductRequest
-    (string Name, List<string> Catagory, string Description, string ImageFile, decimal Price);
+    (string Name, List<string> Categorys, string Description, string ImageFile, decimal Price);
 
 public record CreateProductResponse(Guid ProductId);
 

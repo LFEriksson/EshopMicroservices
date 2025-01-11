@@ -1,7 +1,7 @@
 ﻿namespace Catalog.Api.Features.UpdateProduct;
 
 public record UpdateProductCommand
-    (Guid id, string Name, List<string> Catagory, string Description, string ImageFile, decimal Price)
+    (Guid id, string Name, List<string> Categorys, string Description, string ImageFile, decimal Price)
     : ICommand<UpdateProductResult>;
 
 public record UpdateProductResult(bool IsSuccess);
@@ -22,7 +22,7 @@ internal class UpdateProductComandHandler(IDocumentSession session, ILogger<Upda
         }
 
         product.Name = command.Name;
-        product.Catagory = command.Catagory;
+        product.Categorys = command.Categorys;
         product.Description = command.Description;
         product.ImageFile = command.ImageFile;
         product.Price = command.Price;

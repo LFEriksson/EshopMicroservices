@@ -1,6 +1,6 @@
 ﻿namespace Catalog.Api.Features.GetProductByCategory;
 
-public record GetProductByCategoryQuery(string CategoryQuary) : IQuery<GetProductByCategoryResult>;
+public record GetProductByCategoryQuery(string CategoryQuery) : IQuery<GetProductByCategoryResult>;
 
 public record GetProductByCategoryResult(IEnumerable<Product> Products);
 internal class GetProductByCategoryQueryHandler(IDocumentSession session, ILogger<GetProductByCategoryQueryHandler> logger)
@@ -11,7 +11,7 @@ internal class GetProductByCategoryQueryHandler(IDocumentSession session, ILogge
         logger.LogInformation("GetProductByCategoryQueryHandler.Handle called with {@Query}", query);
 
         var products = await session.Query<Product>()
-            .Where(p => p.Catagory.Contains(query.CategoryQuary))
+            .Where(p => p.Categorys.Contains(query.CategoryQuery))
             .ToListAsync(cancellationToken);
 
         return new GetProductByCategoryResult(products);
