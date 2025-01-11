@@ -4,16 +4,16 @@ using System.Diagnostics;
 
 namespace BuildingBlocks.Behaviors;
 
-public class LoggingBehavior<TRequst, TResponse>
-    (ILogger<LoggingBehavior<TRequst, TResponse>> logger)
-    : IPipelineBehavior<TRequst, TResponse>
-    where TResponse : notnull, IRequest<TResponse>
-    where TRequst : notnull
+public class LoggingBehavior<TRequest, TResponse>
+    (ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+    : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : notnull, IRequest<TResponse>
+    where TResponse : notnull
 {
-    public async Task<TResponse> Handle(TRequst request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         logger.LogInformation("[START] Handle request {Request} - Response={Response} - RequestData={ReequstData}",
-            typeof(TRequst).Name, typeof(TResponse).Name, request);
+            typeof(TRequest).Name, typeof(TResponse).Name, request);
 
         var startTime = Stopwatch.GetTimestamp();
         var response = await next();
@@ -22,11 +22,11 @@ public class LoggingBehavior<TRequst, TResponse>
         if (deltatime.TotalSeconds > 3)
         {
             logger.LogWarning
-                ("[PREFORMANCE] Long execution time for {Request} - {ElapsedMilliseconds}ms - RequestData={RequestData}", typeof(TRequst).Name, deltatime.TotalMilliseconds, request);
+                ("[PREFORMANCE] Long execution time for {Request} - {ElapsedMilliseconds}ms - RequestData={RequestData}", typeof(TRequest).Name, deltatime.TotalMilliseconds, request);
         }
 
         logger.LogInformation("[End] Handle request={Request} - Response={Respose} - RequestData={RequestData}",
-            typeof(TRequst).Name, typeof(TRequst).Name, request);
+            typeof(TRequest).Name, typeof(TRequest).Name, request);
 
         return response;
     }
