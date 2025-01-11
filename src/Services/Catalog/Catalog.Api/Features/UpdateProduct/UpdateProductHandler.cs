@@ -6,6 +6,31 @@ public record UpdateProductCommand
 
 public record UpdateProductResult(bool IsSuccess);
 
+public class UpdateProductValidator : AbstractValidator<UpdateProductCommand>
+{
+    public UpdateProductValidator()
+    {
+        RuleFor(x => x.id)
+            .NotEqual(Guid.Empty)
+            .WithMessage("Product id is required.");
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage("Product name is required.");
+        RuleFor(x => x.Categorys)
+            .NotEmpty()
+            .WithMessage("At least one category is required.");
+        RuleFor(x => x.Description)
+            .NotEmpty()
+            .WithMessage("Product description is required.");
+        RuleFor(x => x.ImageFile)
+            .NotEmpty()
+            .WithMessage("Image file is required.");
+        RuleFor(x => x.Price)
+            .GreaterThan(0)
+            .WithMessage("Price must be greater than 0.");
+    }
+}
+
 internal class UpdateProductComandHandler(IDocumentSession session, ILogger<UpdateProductComandHandler> logger)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
