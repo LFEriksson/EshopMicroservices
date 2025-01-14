@@ -23,6 +23,12 @@ services:
       - "5433:5432"
     volumes:
       - postgres_basketdb:/var/lib/postgresql/data/
+
+  redis:
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
     
   catalog.api:
     environment:
@@ -45,8 +51,10 @@ services:
       - ASPNETCORE_HTTP_PORTS=8090
       - ASPNETCORE_HTTPS_PORTS=8091
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__Redis=redis:6379 
     depends_on:
       - basketdb
+      - redis
     ports:
       - "6001:8090"
       - "6061:8091"
