@@ -21,9 +21,16 @@ services:
       context: .
       dockerfile: src/Services/Basket/Basket.API/Dockerfile
 
+  dicount.grpc:
+    image: ${DOCKER_REGISTRY-}dicountgrpc
+    build:
+      context: .
+      dockerfile: src/Services/Discount/Dicount.Grpc/Dockerfile
+
 volumes:
   postgres_catalogdb:
   postgres_basketdb:
+
 
 
 
