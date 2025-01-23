@@ -1,0 +1,10 @@
+﻿global using Carter;
+global using MediatR;
+global using Ordering.Application.Dtos;
+global using Ordering.API;
+global using Ordering.Application;
+global using Ordering.Infrastructure.Data.Extensions;
+global using Ordering.Infrastructure;
+global using Ordering.Domain.Models;
+global using Ordering.API.Endpoints;
+global using Ordering.Application.Orders.Commands.CreateOrder;
