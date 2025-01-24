@@ -1,3 +1,4 @@
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -22,7 +23,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(options =>
 {
     options.Connection(builder.Configuration.GetConnectionString("Database")!);
-    options.Schema.For<ShoppingCart>().Identity(x => x.CustomerId);
+    options.Schema.For<ShoppingCart>().Identity(x => x.UserName);
 }).UseLightweightSessions();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
@@ -46,6 +47,8 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 
     return handler;
 });
+
+builder.Services.AddMessageBroker(builder.Configuration);
 
 builder.Services.AddValidatorsFromAssembly(assembly);
 

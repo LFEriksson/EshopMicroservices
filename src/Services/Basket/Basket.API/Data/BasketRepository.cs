@@ -2,10 +2,11 @@
 
 public class BasketRepository(IDocumentSession session) : IBasketRepository
 {
-    public async Task<ShoppingCart> GetBasketById(Guid customerId, CancellationToken cancellationToken = default)
+    public async Task<ShoppingCart> GetBasketByName(string customerName, CancellationToken cancellationToken = default)
     {
-        var basket = await session.LoadAsync<ShoppingCart>(customerId, cancellationToken);
-        return basket is null ? throw new BasketNotFoundException(customerId) : basket;
+        var basket = await session.LoadAsync<ShoppingCart>(customerName, cancellationToken);
+
+        return basket is null ? throw new BasketNotFoundException(customerName) : basket;
     }
     public async Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default)
     {
@@ -15,10 +16,11 @@ public class BasketRepository(IDocumentSession session) : IBasketRepository
 
     }
 
-    public async Task<bool> DeleteBasket(Guid customerId, CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
     {
-        session.Delete<ShoppingCart>(customerId);
+        session.Delete<ShoppingCart>(userName);
         await session.SaveChangesAsync(cancellationToken);
         return true;
     }
+
 }

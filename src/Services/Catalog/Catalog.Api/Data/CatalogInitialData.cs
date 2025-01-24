@@ -21,21 +21,21 @@ public class CatalogInitialData : IInitialData
     {
         new Product()
         {
-            Id = Guid.NewGuid(),
+            Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
             Name = "Product 1",
             Categorys = new List<string> { "Category A", "Category B" },
             Description = "Description for Product 1",
             ImageFile = "image1.png",
-            Price = 10
+            Price = 250
         },
         new Product()
         {
-            Id = Guid.NewGuid(),
+            Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
             Name = "Product 2",
             Categorys = new List<string> { "Category C" },
             Description = "Description for Product 2",
             ImageFile = "image2.png",
-            Price = 20
+            Price = 400
         },
         new Product()
         {

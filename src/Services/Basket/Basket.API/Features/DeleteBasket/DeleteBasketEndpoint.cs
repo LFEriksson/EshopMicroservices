@@ -8,12 +8,12 @@ public record DeleteBasketResponse(bool IsSuccess);
 public class DeleteBasketEndpoint(ISender sender) : ControllerBase
 {
 
-    [HttpDelete("{customerId}")]
+    [HttpDelete("{username}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<DeleteBasketResponse>> DeleteBasket(Guid customerId)
+    public async Task<ActionResult<DeleteBasketResponse>> DeleteBasket(string UserName)
     {
-        var result = await sender.Send(new DeleteBasketCommand(customerId));
+        var result = await sender.Send(new DeleteBasketCommand(UserName));
         return Ok(new DeleteBasketResponse(result.IsSuccess));
     }
 }

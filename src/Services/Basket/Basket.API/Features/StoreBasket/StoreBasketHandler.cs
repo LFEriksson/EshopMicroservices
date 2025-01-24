@@ -14,9 +14,9 @@ public class StoreBasketValidator : AbstractValidator<StoreBasketCommand>
             .NotNull()
             .WithMessage("Cart is required.");
 
-        RuleFor(x => x.Cart.CustomerId)
+        RuleFor(x => x.Cart.UserName)
             .NotEmpty()
-            .WithMessage("CustomerId is required.");
+            .WithMessage("UserName is required.");
     }
 }
 
