@@ -7,7 +7,8 @@
         "basket.api": "StartDebugging",
         "catalog.api": "StartDebugging",
         "dicount.grpc": "StartDebugging",
-        "ordering.api": "StartDebugging"
+        "ordering.api": "StartDebugging",
+        "yarpapigateway": "StartDebugging"
       }
     }
   }
